@@ -6,10 +6,11 @@ using {
 namespace home.po.sap;
 
 entity PurchaseOrderT : cuid, managed {
-  key PurchaseOrder                : String(15);
+     PurchaseOrder                : String(15);
       SupplierName                 : String(255);
       Supplier                     : String(128);
       GrossAmountInTransacCurrency : Decimal;
+      DeliveryDate                  : Date;
       Status                       : String(50);
       Items                        : Composition of many PurchaseItemsT
                                        on Items.parentKey = $self

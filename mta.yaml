@@ -26,30 +26,8 @@ modules:
   - name: PurchaseOrder-db
   parameters:
     buildpack: nodejs_buildpack
-- name: PurchaseOrder-app-content
-  type: com.sap.application.content
-  path: .
-  requires:
-  - name: PurchaseOrder-repo-host
-    parameters:
-      content-target: true
-  build-parameters:
-    build-result: resources
-    requires:
-    - artifacts:
-      - sapcommanagepurchaseorder.zip
-      name: sapcommanagepurchaseorder
-      target-path: resources/
-- name: sapcommanagepurchaseorder
-  type: html5
-  path: managepurchaseorder
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
+
+
 resources:
 - name: PurchaseOrder-db
   type: com.sap.xs.hdi-container
