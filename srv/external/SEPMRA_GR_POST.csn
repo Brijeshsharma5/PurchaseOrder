@@ -1,0 +1,345 @@
+{
+ "meta": {
+  "creator": "cds-dk 8.1.2"
+ },
+ "$version": "2.0",
+ "definitions": {
+  "SEPMRA_GR_POST": {
+   "kind": "service",
+   "@cds.external": true,
+   "@m.IsDefaultEntityContainer": "true",
+   "@sap.supported.formats": "atom json xlsx"
+  },
+  "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrder": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "@sap.creatable": "false",
+   "@sap.updatable": "false",
+   "@sap.deletable": "false",
+   "@sap.searchable": "true",
+   "@sap.content.version": "1",
+   "@sap.label": "Purchase Order",
+   "elements": {
+    "PurchaseOrder": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Purchase Order",
+     "@sap.quickinfo": "Purchase Order ID",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.value.list": "standard",
+     "notNull": true
+    },
+    "Approve_ac": {
+     "type": "cds.Boolean",
+     "@sap.label": "Dyn. Action Control",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false"
+    },
+    "Copy_ac": {
+     "type": "cds.Boolean",
+     "@sap.label": "Dyn. Action Control",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false"
+    },
+    "Goodsreceipt_ac": {
+     "type": "cds.Boolean",
+     "@sap.label": "Dyn. Action Control",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false"
+    },
+    "Quickapprove_ac": {
+     "type": "cds.Boolean",
+     "@sap.label": "Dyn. Action Control",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false"
+    },
+    "Quickreject_ac": {
+     "type": "cds.Boolean",
+     "@sap.label": "Dyn. Action Control",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false"
+    },
+    "Reject_ac": {
+     "type": "cds.Boolean",
+     "@sap.label": "Dyn. Action Control",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false"
+    },
+    "GrossAmountInTransacCurrency_fc": {
+     "type": "cds.Integer",
+     "@odata.Type": "Edm.Byte",
+     "@sap.label": "Dyn. Field Control",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false"
+    },
+    "TransactionCurrency_fc": {
+     "type": "cds.Integer",
+     "@odata.Type": "Edm.Byte",
+     "@sap.label": "Dyn. Field Control",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.sortable": "false",
+     "@sap.filterable": "false"
+    },
+    "GrossAmountInTransacCurrency": {
+     "type": "cds.Decimal",
+     "precision": 16,
+     "scale": 3,
+     "@sap.field.control": "GrossAmountInTransacCurrency_fc",
+     "@sap.unit": "TransactionCurrency",
+     "@sap.label": "Gross Amount",
+     "@sap.quickinfo": "EPM: Total Gross Amount"
+    },
+    "TransactionCurrency": {
+     "type": "cds.String",
+     "length": 5,
+     "@sap.field.control": "TransactionCurrency_fc",
+     "@sap.label": "Currency",
+     "@sap.semantics": "currency-code"
+    },
+    "PurchaseOrderOverallStatus": {
+     "type": "cds.String",
+     "length": 1,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Status",
+     "@sap.quickinfo": "Purchase Order Overall Status",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "Supplier": {
+     "type": "cds.String",
+     "length": 10,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "SupplierName",
+     "@sap.label": "Supplier",
+     "@sap.quickinfo": "Supplier ID"
+    },
+    "SupplierName": {
+     "type": "cds.String",
+     "length": 80,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Supplier Name",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "to_Items": {
+     "type": "cds.Association",
+     "target": "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrderItem",
+     "cardinality": {
+      "max": "*"
+     },
+     "keys": []
+    },
+    "to_PurchaseOrderValueHelp": {
+     "type": "cds.Association",
+     "target": "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrderVH",
+     "keys": []
+    }
+   },
+   "actions": {
+    "SEPMRA_C_GR_PurchaseOrderApprove": {
+     "kind": "action",
+     "params": {
+      "Reason": {
+       "type": "cds.String",
+       "length": 255
+      }
+     },
+     "returns": {
+      "type": "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrder"
+     }
+    },
+    "SEPMRA_C_GR_PurchaseOrderCopy": {
+     "kind": "action",
+     "returns": {
+      "type": "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrder"
+     }
+    },
+    "SEPMRA_C_GR_PurchaseOrderGoodsreceipt": {
+     "kind": "action",
+     "returns": {
+      "type": "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrder"
+     }
+    },
+    "SEPMRA_C_GR_PurchaseOrderQuickapprove": {
+     "kind": "action",
+     "returns": {
+      "type": "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrder"
+     }
+    },
+    "SEPMRA_C_GR_PurchaseOrderQuickreject": {
+     "kind": "action",
+     "returns": {
+      "type": "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrder"
+     }
+    },
+    "SEPMRA_C_GR_PurchaseOrderReject": {
+     "kind": "action",
+     "params": {
+      "Reason": {
+       "type": "cds.String",
+       "length": 255
+      }
+     },
+     "returns": {
+      "type": "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrder"
+     }
+    }
+   }
+  },
+  "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrderItem": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "@sap.creatable": "false",
+   "@sap.updatable": "false",
+   "@sap.deletable": "false",
+   "@sap.searchable": "true",
+   "@sap.content.version": "1",
+   "@sap.label": "Purchase Order Item",
+   "elements": {
+    "PurchaseOrder": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Purchase Order",
+     "@sap.quickinfo": "Purchase Order ID",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "notNull": true
+    },
+    "PurchaseOrderItem": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Item",
+     "@sap.quickinfo": "Purchase Order Item Position",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "notNull": true
+    },
+    "Product": {
+     "type": "cds.String",
+     "length": 10,
+     "@sap.display.format": "UpperCase",
+     "@sap.text": "ProductName",
+     "@sap.label": "Product",
+     "@sap.quickinfo": "Product ID"
+    },
+    "ProductName": {
+     "type": "cds.String",
+     "length": 255,
+     "@sap.label": "Name",
+     "@sap.quickinfo": "Product Name",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "ProductPictureURL": {
+     "type": "cds.String",
+     "length": 255,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Image",
+     "@sap.quickinfo": "Image of the product",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "DeliveryDateTime": {
+     "type": "cds.Timestamp",
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@odata.Precision": 7,
+     "@sap.label": "Delivery Date",
+     "@sap.quickinfo": "EPM: Schedule Line Delivery Date"
+    },
+    "Quantity": {
+     "type": "cds.Integer",
+     "@sap.unit": "QuantityUnit",
+     "@sap.label": "Quantity",
+     "@sap.quickinfo": "Quantity, rounded to the next whole number"
+    },
+    "QuantityUnit": {
+     "type": "cds.String",
+     "length": 3,
+     "@sap.text": "QuantityUnitName",
+     "@sap.label": "Quantity Unit",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.semantics": "unit-of-measure"
+    },
+    "QuantityUnitName": {
+     "type": "cds.String",
+     "length": 10,
+     "@sap.label": "Quantity Unit",
+     "@sap.quickinfo": "EPM Ref App &quot;Post GR&quot;: Quantity Unit Name",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "GrossAmountInTransacCurrency": {
+     "type": "cds.Decimal",
+     "precision": 16,
+     "scale": 3,
+     "@sap.unit": "TransactionCurrency",
+     "@sap.label": "Gross Amount",
+     "@sap.quickinfo": "EPM: Total Gross Amount",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false"
+    },
+    "TransactionCurrency": {
+     "type": "cds.String",
+     "length": 5,
+     "@sap.label": "Currency",
+     "@sap.creatable": "false",
+     "@sap.updatable": "false",
+     "@sap.semantics": "currency-code"
+    }
+   }
+  },
+  "SEPMRA_GR_POST.SEPMRA_C_GR_PurchaseOrderVH": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "@sap.creatable": "false",
+   "@sap.updatable": "false",
+   "@sap.deletable": "false",
+   "@sap.searchable": "true",
+   "@sap.content.version": "1",
+   "@sap.label": "Purchase Order",
+   "elements": {
+    "PurchaseOrder": {
+     "key": true,
+     "type": "cds.String",
+     "length": 10,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Purchase Order",
+     "@sap.quickinfo": "Purchase Order ID",
+     "notNull": true
+    },
+    "SupplierName": {
+     "type": "cds.String",
+     "length": 80,
+     "@sap.display.format": "UpperCase",
+     "@sap.label": "Supplier Name"
+    }
+   }
+  }
+ }
+}

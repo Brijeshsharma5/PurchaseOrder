@@ -3,76 +3,82 @@ ID: PurchaseOrder
 description: A simple CAP project.
 version: 1.0.0
 modules:
-- name: PurchaseOrder-srv
-  type: nodejs
-  path: gen/srv
-  requires:
-  - name: PurchaseOrder-db
-  - name: PurchaseOrder-auth
-  provides:
-  - name: srv-api
-    properties:
-      srv-url: ${default-url}
-  parameters:
-    buildpack: nodejs_buildpack
-    readiness-health-check-http-endpoint: /health
-    readiness-health-check-type: http
-  build-parameters:
-    builder: npm
-- name: PurchaseOrder-db-deployer
-  type: hdb
-  path: gen/db
-  requires:
-  - name: PurchaseOrder-db
-  parameters:
-    buildpack: nodejs_buildpack
-
+  - name: PurchaseOrder-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: PurchaseOrder-db
+      - name: PurchaseOrder-auth
+      - name: PurchaseOrder-destination-service
+      - name: PurchaseOrder-connectivity
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    parameters:
+      buildpack: nodejs_buildpack
+      readiness-health-check-http-endpoint: /health
+      readiness-health-check-type: http
+    build-parameters:
+      builder: npm
+  - name: PurchaseOrder-db-deployer
+    type: hdb
+    path: gen/db
+    requires:
+      - name: PurchaseOrder-db
+    parameters:
+      buildpack: nodejs_buildpack
 
 resources:
-- name: PurchaseOrder-db
-  type: com.sap.xs.hdi-container
-  parameters:
-    service: hana
-    service-plan: hdi-shared
-- name: PurchaseOrder-auth
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      tenant-mode: dedicated
-      xsappname: PurchaseOrder
-    path: ./xs-security.json
-    service: xsuaa
-    service-plan: application
-- name: PurchaseOrder-repo-host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-name: PurchaseOrder-html5-srv
-    service-plan: app-host
-- name: PurchaseOrder-destination-service
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      HTML5Runtime_enabled: false
-      init_data:
-        instance:
-          destinations:
-          - Authentication: NoAuthentication
-            Name: ui5
-            ProxyType: Internet
-            Type: HTTP
-            URL: https://ui5.sap.com
-          existing_destinations_policy: update
-      version: 1.0.0
-    service: destination
-    service-name: PurchaseOrder-destination-service
-    service-plan: lite
+  - name: PurchaseOrder-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: PurchaseOrder-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        tenant-mode: dedicated
+        xsappname: PurchaseOrder
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application
+  - name: PurchaseOrder-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: PurchaseOrder-html5-srv
+      service-plan: app-host
+  - name: PurchaseOrder-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: false
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: PurchaseOrder-destination-service
+      service-plan: lite
+  - name: PurchaseOrder-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:
-  - builder: custom
-    commands:
-    - npm ci
-    - npx cds build --production
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production

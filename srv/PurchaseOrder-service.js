@@ -7,6 +7,13 @@ module.exports = cds.service.impl(async function() {
         return `Purchase Order with ID ${ID} has been successfully processed`;
     });
 
+    this.on("READ","SEPMRA_C_GR_PurchaseOrder", async function (req){
+        const service =await cds.connect.to("SEPMRA_GR_POST");
+        let resultVar = await service.tx(req).run(req.query);
+        return resultVar;
+      });
+    
+
 
     const runQuery = async function (query) {
         return await cds.run(query).then((res, rej) => {
