@@ -12,6 +12,12 @@ module.exports = cds.service.impl(async function() {
         let resultVar = await service.tx(req).run(req.query);
         return resultVar;
       });
+
+      this.on("READ","SEPMRA_I_Product_E", async function (req){
+        const service =await cds.connect.to("ZPDCDS_SRV");
+        let resultVar = await service.tx(req).run(req.query);
+        return resultVar;
+      });
     
 
 

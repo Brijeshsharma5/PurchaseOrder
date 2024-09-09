@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "creator": "cds-dk 8.1.2"
+  },
+  "$version": "2.0",
+  "definitions": {
+    "ZPDCDS_SRV": {
+      "kind": "service",
+      "@cds.external": true,
+      "@m.IsDefaultEntityContainer": "true",
+      "@sap.supported.formats": "atom json xlsx"
+    },
+    "ZPDCDS_SRV.SEPMRA_I_Product_E": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.content.version": "1",
+      "@sap.label": "Product",
+      "elements": {
+        "Product": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Product",
+          "@sap.quickinfo": "Product ID",
+          "notNull": true
+        },
+        "ProductType": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Type Code",
+          "@sap.quickinfo": "EPM: Product Type Code"
+        },
+        "ProductCategory": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Sub-Category",
+          "@sap.quickinfo": "Product Sub-Category"
+        },
+        "CreatedByUser": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Created by"
+        },
+        "CreationDateTime": {
+          "type": "cds.Timestamp",
+          "@odata.Type": "Edm.DateTimeOffset",
+          "@odata.Precision": 7,
+          "@sap.label": "Created At",
+          "@sap.quickinfo": "EPM: Created At"
+        },
+        "LastChangedByUser": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Last Changed by",
+          "@sap.quickinfo": "Fiori Reference Apps: Changed by employee"
+        },
+        "LastChangedDateTime": {
+          "type": "cds.Timestamp",
+          "@odata.Type": "Edm.DateTimeOffset",
+          "@odata.Precision": 7,
+          "@sap.label": "Last Changed"
+        },
+        "Price": {
+          "type": "cds.Decimal",
+          "precision": 16,
+          "scale": 3,
+          "@sap.unit": "Currency",
+          "@sap.label": "Price per Unit",
+          "@sap.quickinfo": "Fiori Reference Apps: Product Unit Price"
+        },
+        "Currency": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.label": "Currency",
+          "@sap.semantics": "currency-code"
+        },
+        "Height": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3,
+          "@sap.unit": "DimensionUnit",
+          "@sap.label": "Height",
+          "@sap.quickinfo": "EPM: Height"
+        },
+        "Width": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3,
+          "@sap.unit": "DimensionUnit",
+          "@sap.label": "Width",
+          "@sap.quickinfo": "EPM: Width"
+        },
+        "Depth": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3,
+          "@sap.unit": "DimensionUnit",
+          "@sap.label": "Depth",
+          "@sap.quickinfo": "EPM: Depth"
+        },
+        "DimensionUnit": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.label": "Dimension Unit",
+          "@sap.quickinfo": "EPM: Dimension Unit",
+          "@sap.semantics": "unit-of-measure"
+        },
+        "ProductPictureURL": {
+          "type": "cds.String",
+          "length": 255,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Image",
+          "@sap.quickinfo": "Image of the product"
+        },
+        "ProductValueAddedTax": {
+          "type": "cds.Integer",
+          "@odata.Type": "Edm.Byte",
+          "@sap.label": "Tax Tariff Code",
+          "@sap.quickinfo": "EPM: Product Tax Tariff Code"
+        },
+        "Supplier": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Supplier",
+          "@sap.quickinfo": "Supplier ID"
+        },
+        "ProductBaseUnit": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.label": "Base Unit",
+          "@sap.quickinfo": "Base Unit of Measurement for Product Quantities",
+          "@sap.semantics": "unit-of-measure"
+        },
+        "Weight": {
+          "type": "cds.Decimal",
+          "precision": 13,
+          "scale": 3,
+          "@sap.unit": "WeightUnit",
+          "@sap.label": "Weight",
+          "@sap.quickinfo": "EPM: Weight Measure"
+        },
+        "WeightUnit": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.label": "Weight Unit",
+          "@sap.semantics": "unit-of-measure"
+        },
+        "OriginalLanguage": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.label": "Original Language"
+        }
+      }
+    }
+  }
+}

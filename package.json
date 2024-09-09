@@ -44,6 +44,14 @@
           "path": "/sap/opu/odata/SAP/SEPMRA_GR_POST/"
         }
       },
+      "ZPDCDS_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/ZPDCDS_SRV",
+        "credentials": {
+          "destination": "ES5",
+          "path": "/sap/opu/odata/SAP/ZPDCDS_SRV/"
+        }
+      },
       "destinations": true,
       "connectivity": true
     },
