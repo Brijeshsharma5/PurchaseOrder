@@ -1,7 +1,29 @@
 const cds = require('@sap/cds');
 module.exports = cds.service.impl(async function() {
+
+const workflow = await cds.connect.to("workflow");
+
+
+
+
+
     this.on('onSubmit', async (req) => {
         const { ID } = req.data;
+        let workflowPayload = {
+            "definitionId": "us10.e7776d2ftrial.demo.demo_PR",
+            "context": {
+                "demo1": "value1",
+                "demo2": "valu2"
+            }
+        };
+        console.log('inside workflow call triggered....')
+        const wokrflowresponse = await workflow.post('/workflow/rest/v1/workflow-instances',workflowPayload ).catch(function(error){
+            return req.error({code:417,message:error.message});
+        });
+
+        console.log(`workflow call completed`)
+        console.log(wokrflowresponse)
+
         let response = await runQuery(UPDATE`HOME_PO_SAP_PURCHASEORDERT`.set({ Status: 'Completed' }).where`ID=${ID}`);
    
         return `Purchase Order with ID ${ID} has been successfully processed`;

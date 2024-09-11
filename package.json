@@ -36,6 +36,13 @@
       "db": {
         "kind": "hana"
       },
+      "workflow": {
+        "kind": "rest",
+        "credentials": {
+          "destination": "Workflow_Trigger_Dest"
+          
+        }
+      },
       "SEPMRA_GR_POST": {
         "kind": "odata-v2",
         "model": "srv/external/SEPMRA_GR_POST",
