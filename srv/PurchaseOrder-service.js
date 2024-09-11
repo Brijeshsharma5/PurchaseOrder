@@ -12,8 +12,11 @@ const workflow = await cds.connect.to("workflow");
         let workflowPayload = {
             "definitionId": "us10.e7776d2ftrial.demo.demo_PR",
             "context": {
-                "demo1": "value1",
-                "demo2": "valu2"
+                "suppliername": "BirjuBoss",
+                "grossamountintransaccurrency": "1000",
+                "deliverydate": "2024/09/11",
+                "purchaseorder": "01",
+                "supplier": "100"
             }
         };
         console.log('inside workflow call triggered....')
