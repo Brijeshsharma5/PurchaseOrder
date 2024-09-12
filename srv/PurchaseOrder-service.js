@@ -8,15 +8,16 @@ const workflow = await cds.connect.to("workflow");
 
 
     this.on('onSubmit', async (req) => {
-        const { ID } = req.data;
+        const { ID,SupplierName,GrossAmountInTransacCurrency,DeliveryDate,PurchaseOrder,Supplier } = req.data;
+        console.log('Request Data:', req.data);
         let workflowPayload = {
             "definitionId": "us10.e7776d2ftrial.demo.demo_PR",
             "context": {
-                "suppliername": "BirjuBoss",
-                "grossamountintransaccurrency": "1000",
-                "deliverydate": "2024/09/11",
-                "purchaseorder": "01",
-                "supplier": "100"
+                "suppliername":SupplierName,
+                "grossamountintransaccurrency": GrossAmountInTransacCurrency,
+                "deliverydate": DeliveryDate,
+                "purchaseorder": PurchaseOrder,
+                "supplier": Supplier
             }
         };
         console.log('inside workflow call triggered....')
